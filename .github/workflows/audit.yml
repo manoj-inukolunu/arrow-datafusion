@@ -15,31 +15,29 @@
 # specific language governing permissions and limitations
 # under the License.
 
-[package]
-name = "datafusion-substrait"
-description = "DataFusion Substrait Producer and Consumer"
-readme = "README.md"
-version = { workspace = true }
-edition = { workspace = true }
-homepage = { workspace = true }
-repository = { workspace = true }
-license = { workspace = true }
-authors = { workspace = true }
-# Specify MSRV here as `cargo msrv` doesn't support workspace version
-rust-version = "1.72"
+name: Security audit
 
-[dependencies]
-async-recursion = "1.0"
-chrono = { workspace = true }
-datafusion = { workspace = true }
-itertools = { workspace = true }
-object_store = { workspace = true }
-prost = "0.12"
-prost-types = "0.12"
-substrait = "0.24.0"
+concurrency:
+  group: ${{ github.repository }}-${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
 
-[dev-dependencies]
-tokio = { workspace = true }
+on:
+  push:
+    paths:
+      - "**/Cargo.toml"
+      - "**/Cargo.lock"
 
-[features]
-protoc = ["substrait/protoc"]
+  pull_request:
+    paths:
+      - "**/Cargo.toml"
+      - "**/Cargo.lock"
+
+jobs:
+  security_audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+      - name: Run audit check
+        run: cargo audit

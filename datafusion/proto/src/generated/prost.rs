@@ -2728,7 +2728,7 @@ pub enum ScalarFunction {
     ArrayPrepend = 94,
     ArrayRemove = 95,
     ArrayReplace = 96,
-    ArrayToString = 97,
+    /// 97 was ArrayToString
     Cardinality = 98,
     ArrayElement = 99,
     ArraySlice = 100,
@@ -2765,6 +2765,7 @@ pub enum ScalarFunction {
     MakeDate = 133,
     ArrayReverse = 134,
     RegexpLike = 135,
+    ToChar = 136,
 }
 impl ScalarFunction {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -2870,7 +2871,6 @@ impl ScalarFunction {
             ScalarFunction::ArrayPrepend => "ArrayPrepend",
             ScalarFunction::ArrayRemove => "ArrayRemove",
             ScalarFunction::ArrayReplace => "ArrayReplace",
-            ScalarFunction::ArrayToString => "ArrayToString",
             ScalarFunction::Cardinality => "Cardinality",
             ScalarFunction::ArrayElement => "ArrayElement",
             ScalarFunction::ArraySlice => "ArraySlice",
@@ -2907,6 +2907,7 @@ impl ScalarFunction {
             ScalarFunction::MakeDate => "MakeDate",
             ScalarFunction::ArrayReverse => "ArrayReverse",
             ScalarFunction::RegexpLike => "RegexpLike",
+            ScalarFunction::ToChar => "ToChar",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3009,7 +3010,6 @@ impl ScalarFunction {
             "ArrayPrepend" => Some(Self::ArrayPrepend),
             "ArrayRemove" => Some(Self::ArrayRemove),
             "ArrayReplace" => Some(Self::ArrayReplace),
-            "ArrayToString" => Some(Self::ArrayToString),
             "Cardinality" => Some(Self::Cardinality),
             "ArrayElement" => Some(Self::ArrayElement),
             "ArraySlice" => Some(Self::ArraySlice),
@@ -3046,6 +3046,7 @@ impl ScalarFunction {
             "MakeDate" => Some(Self::MakeDate),
             "ArrayReverse" => Some(Self::ArrayReverse),
             "RegexpLike" => Some(Self::RegexpLike),
+            "ToChar" => Some(Self::ToChar),
             _ => None,
         }
     }
